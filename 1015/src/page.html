@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <p>返回</p>
+        <p class="fa">发布</p>
+    </header>
+    <div class="fatit">
+        <input type="text" placeholder="标题" class="biao">
+        <input type="text" class="text">
+    </div>
+    <script>
+        var biao = document.querySelector('.biao').value;
+        var text = document.querySelector('.text').value;
+        var fa = document.querySelector('.fa');
+        fa.onclick = function() {
+            var biao = document.querySelector('.biao').value;
+            var text = document.querySelector('.text').value;
+            var xml = new XMLHttpRequest();
+            xml.onload = function(res) {
+                if (res.target.status === 200) {
+                    var data = JSON.parse(res.target.response);
+                    location.href = './index.html';
+                }
+            }
+            xml.open('post', '/api/add', true);
+            xml.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xml.send(`biao=${biao}&text=${text}`);
+
+        }
+    </script>
+</body>
+
+</html>
